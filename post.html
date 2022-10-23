@@ -17,10 +17,10 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                <a class="nav-link" href="index.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="post.html">Create Post</a>
+                <a class="nav-link active" aria-current="page" href="post.html">Create Post</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="social.html">Social</a>
@@ -58,5 +58,33 @@
           </div>
         </div>
       </nav>
+      <div class="card" style="width: 18rem;">
+        <div class="input-group input-group-lg">
+            <span class="input-group-text" id="inputGroup-sizing-lg">Title:</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+          </div>
+          <br></br>
+        <img src="uploadImage.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <form>
+            <button type="button" class="btn btn-primary btn-sm">Choose File</button>
+            <br></br>
+            <div class="mb-3">
+              <label for="descriptionInput" class="form-label">Description:</label>
+              <textarea class="form-control" id="descriptionInput"></textarea>
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio2">Trading</label>
+              
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio3">Keeping</label>
+              </div>
+              <br></br>
+          </form>
+          <a href="#" class="btn btn-primary">Post</a>
+        </div>
+      </div>
   </body>
 </html>
