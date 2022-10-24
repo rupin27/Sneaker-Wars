@@ -22,34 +22,40 @@ For Sneaker Wars we could have users log in to create/edit their own profile and
 
 # User Interface
 
-Provide a description and images of the user interface your
-application will intend on supporting.
+Wireframe for the site
+
+![example image](images/wireframe.JPG)
+
+Log in / sign in on the home page
 
 ![example image](images/SS1.JPG)
 
-Sample
+Navigation bar on each page for easy access
 
 ![example image](images/SS2.JPG)
 
-Sample
+Create a Post to share your new sneakers with the world
 
 ![example image](images/SS3.JPG)
 
-Sample
+Social tab to interact with all your friends and see what's new on the market
 
 ![example image](images/SS4.JPG)
-Sample
+
+History of recent follows, likes, trading activity, etc.
 
 ![example image](images/SS5.JPG)
-Sample
+
+Bookmarks for the sneakers you want to come back to later
 
 ![example image](images/SS6.JPG)
-Sample
+
+User profile to admire your own collection and make sure people know what you're about
 
 ![example image](images/SS7.JPG)
-Sample
+
+Messages system to contact other enthusiasts whether just to chat or close a deal
 
 ![example image](images/SS8.JPG)
-Sample
 
-The above image is a screenshot of the debate page of our application with an example debate in the chat box. This page looks very similar to the discussion page, except for the fact that you can only talk to one person at a time. As in the discussion page, the colors of the messages are different colors for different people talking. There is also a text box at the bottom of the page for sending your message to the person you are debating.
+
