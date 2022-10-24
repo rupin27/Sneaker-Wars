@@ -25,22 +25,31 @@ For Sneaker Wars we could have users log in to create/edit their own profile and
 Provide a description and images of the user interface your
 application will intend on supporting.
 
-![example image](imgs/UI_home.png)
+![example image](images/SS1.JPG)
 
 Sample
 
-![example image](imgs/UI_user.png)
+![example image](images/SS2.JPG)
 
 Sample
 
-![example image](imgs/UI_Poll.png)
+![example image](images/SS3.JPG)
 
 Sample
 
-![example image](imgs/UI_discussion.png)
-
+![example image](images/SS4.JPG)
 Sample
 
-![example image](imgs/UI_debate.png)
+![example image](images/SS5.JPG)
+Sample
+
+![example image](images/SS6.JPG)
+Sample
+
+![example image](images/SS7.JPG)
+Sample
+
+![example image](images/SS8.JPG)
+Sample
 
 The above image is a screenshot of the debate page of our application with an example debate in the chat box. This page looks very similar to the discussion page, except for the fact that you can only talk to one person at a time. As in the discussion page, the colors of the messages are different colors for different people talking. There is also a text box at the bottom of the page for sending your message to the person you are debating.
