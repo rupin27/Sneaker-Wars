@@ -2,6 +2,7 @@
   "dependencies": {
     "bootstrap": "^5.2.2",
     "bootstrap-icons": "^1.9.1",
-    "firebase": "^9.13.0"
+    "firebase": "^9.13.0",
+    "firebase-tools": "^11.16.0"
   }
 }
