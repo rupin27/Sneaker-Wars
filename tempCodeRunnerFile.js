@@ -1,1 +1,0 @@
-var initializeApp = require('firebase/app')
