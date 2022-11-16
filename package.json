@@ -1,0 +1,23 @@
+{
+  "name": "cs326-final-beta-sean",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spdriscoll/cs326-final-beta-sean.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spdriscoll/cs326-final-beta-sean/issues"
+  },
+  "homepage": "https://github.com/spdriscoll/cs326-final-beta-sean#readme"
+}
