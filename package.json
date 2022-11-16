@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/spdriscoll/cs326-final-beta-sean/issues"
   },
-  "homepage": "https://github.com/spdriscoll/cs326-final-beta-sean#readme"
+  "homepage": "https://github.com/spdriscoll/cs326-final-beta-sean#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
