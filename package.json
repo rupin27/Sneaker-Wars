@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/spdriscoll/cs326-final-beta-sean#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "html": "^1.0.0"
   }
 }

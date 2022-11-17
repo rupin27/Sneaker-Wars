@@ -1,17 +1,15 @@
 'use strict';
 import express from 'express';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 const app = express();
 const port = 8080;
+app.use(express.static('public'))
+app.use(express.static('.'))
+app.use(express.static('images'))
 
 app.get('/', (req, res) => {
-    console.log(__dirname + '\\index.html');
-    res.sendFile(__dirname + '\\index.html');
+        res.sendFile('index.html', { root: '.' })
     });
   
 app.listen(port, () => {
