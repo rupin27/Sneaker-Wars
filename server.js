@@ -9,7 +9,8 @@ app.use(express.static('.'))
 app.use(express.static('images'))
 
 app.get('/', (req, res) => {
-        res.sendFile('index.html', { root: '.' })
+        //res.sendFile('index.html', { root: '.' })
+        res.send("working");
     });
   
 app.listen(port, () => {
