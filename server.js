@@ -8,8 +8,8 @@ app.use(express.static('public'))
 app.use(express.static('.'))
 app.use(express.static('images'))
 */
-const express = require('express')
-const path = require('path')
+import express from 'express';
+import path from 'path';
 const app = express();
 const PORT = process.env.PORT || 5000
 app.use('/', express.static('./html'));
