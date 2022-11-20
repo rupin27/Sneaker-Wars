@@ -24,12 +24,15 @@
     "express": "^4.18.2",
     "html": "^1.0.0",
     "http": "^0.0.1-security",
-    "path": "^0.12.7"
+    "node-fetch": "^3.3.0",
+    "path": "^0.12.7",
+    "sneaks-api": "^1.2.3"
   },
   "keywords": [
     "node",
     "heroku",
     "express"
   ],
+  "devDependencies": {},
   "description": ""
 }
