@@ -26,6 +26,7 @@
     "http": "^0.0.1-security",
     "node-fetch": "^3.3.0",
     "path": "^0.12.7",
+    "pg": "^8.8.0",
     "sneaks-api": "^1.2.3"
   },
   "keywords": [
@@ -33,6 +34,5 @@
     "heroku",
     "express"
   ],
-  "devDependencies": {},
   "description": ""
 }
