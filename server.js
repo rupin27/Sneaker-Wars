@@ -6,6 +6,29 @@ const sneaks = new SneaksAPI();
 const PORT = process.env.PORT || 5000
 app.use('/', express.static('./html'));
 
+//database===========================================================================
+import {processGET} from "./database.js";
+import {processPOST} from "./database.js";
+import pkg from "pg";
+import { config } from 'dotenv';
+const { Pool } = pkg;
+const { Client } = pkg;
+
+
+config();
+const port = parseInt(process.env.PGPORT, 10) || 5000;
+const name = process.env.PGUSER || "Sean";
+console.log(name, " using ", port);
+
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  });
+
+//database===========================================================================
 
 app.get('/', (req, res) => {  //send index.html at root
   res.sendFile("index");
@@ -21,6 +44,33 @@ app.get('/search', (req, res) => {
 
 //add searchN to search more than 1
 
+
+app.get('/getTable', async (req, res) => {//database get request
+  try {
+    const client = await pool.connect();
+    const result = await client.query(processGET(req.query.table));
+    console.log("RESULTS: ", result);
+    res.send(result);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+
+app.post('/postTable', async (req, res) => {//database post request
+  try {
+    const client = await pool.connect();
+    const result = await client.query(processPOST(req.query.table));
+    console.log("RESULTS: ", result);
+    res.send(result);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
 
 app.listen(PORT || 5000, function(){//listen at process' port
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
