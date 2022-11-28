@@ -28,7 +28,7 @@ const pool = new Pool({
     }
   });
 
-//database===========================================================================
+//database==========================================================================
 
 app.get('/', (req, res) => {  //send index.html at root
   res.sendFile("index");
@@ -69,6 +69,73 @@ app.post('/postTable', async (req, res) => {//database post request
   } catch (err) {
     console.error(err);
     res.send("Error " + err);
+  }
+});
+
+
+//crud functionality ==========================================================================
+
+const self = this;
+this.app.post('/createAccount', async (req, res) => {
+  try {
+    const { userName, userPass, userImg, userLocation, about, pairs, followers, following } = req.query;
+    const entry = await self.db.createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following);
+    res.send(entry);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+this.app.get('/readAccount', async (req, res) => {
+  try {
+    const { userName} = req.query;
+    const entry = await self.db.readAccount(userName);
+    res.send(entry);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
+this.app.delete('/removeAccount', async (req, res) => {
+  try {
+    const { userName } = req.query;
+    const entry = await self.db.removeAccount(userName);
+    res.send(entry);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
+this.app.post('/updateAccount', async (req, res) => {
+  try {
+    const { userName, followers, following } = req.query;
+    const entry = await self.db.updateAccount(userName, followers, following);
+    res.send(entry);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+this.app.post('/postProduct', async (req, res) => {
+  try {
+    const { ownerUserName, ownerImage, shoeName, shoeDesc, datePosted } = req.query;
+    const entry = await self.db.postProduct(ownerUserName, ownerImage, shoeName, shoeDesc, datePosted);
+    res.send(entry);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+this.app.get('/getProduct', async (req, res) => {
+  try {
+    const { ownerUserName, shoeName, datePosted } = req.query;
+    const entry = await self.db.getProduct(ownerUserName, shoeName, datePosted);//
+    res.send(entry);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
   }
 });
 

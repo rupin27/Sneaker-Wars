@@ -1,5 +1,5 @@
 let shoeObject = {
-    ownerName: String,  
+    ownerUserName: String,  
 	ownerImage: Image,
     shoeName: String,
     shoeDesc: String,
