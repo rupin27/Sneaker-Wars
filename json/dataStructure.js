@@ -1,11 +1,3 @@
-let shoeObject = {
-    ownerUserName: String,  
-	ownerImage: Image,
-    shoeName: String,
-    shoeDesc: String,
-    datePosted: Date
-}
-
 let loginAuth = {
     userName: String,
     userPass: String,
@@ -15,4 +7,13 @@ let loginAuth = {
     pairs: Number,
     followers: Number,
     following: Number,
+}
+, rent, income, postProduct, saving
+
+let shoeObject = {
+    ownerUserName: String,  
+    ownerImage: Image,
+    shoeName: String,
+    shoeDesc: String,
+    datePosted: Date
 }
