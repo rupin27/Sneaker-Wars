@@ -8,8 +8,8 @@ const PORT = process.env.PORT || 8080
 app.use('/', express.static('./html'));
 
 //database===========================================================================
-import {processGET} from "./database.js";
-import {processPOST} from "./database.js";
+import {processGET} from "./client/crud.js";
+import {processPOST} from "./client/crud.js";
 import pkg from "pg";
 import { config } from 'dotenv';
 const { Pool } = pkg;
