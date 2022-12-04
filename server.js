@@ -1,5 +1,6 @@
 import express from 'express';
 import SneaksAPI from 'sneaks-api';
+import * from './client/crud'
 const app = express();
 const router = express.Router();
 const sneaks = new SneaksAPI();
@@ -75,21 +76,20 @@ app.post('/postTable', async (req, res) => {//database post request
 
 //crud functionality ==========================================================================
 
-const self = this;
-this.app.post('/createAccount', async (req, res) => {
+app.post('/createAccount', async (req, res) => {
   try {
     const { userName, userPass, userImg, userLocation, about, pairs, followers, following } = req.query;
-    const entry = await self.db.createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following);
+    const entry = await createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following);
     res.send(entry);
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
-this.app.get('/readAccount', async (req, res) => {
+app.get('/readAccount', async (req, res) => {
   try {
     const { userName} = req.query;
-    const entry = await self.db.readAccount(userName);
+    const entry = await readAccount(userName);
     res.send(entry);
   } catch (err) {
     console.log(err);
@@ -97,10 +97,10 @@ this.app.get('/readAccount', async (req, res) => {
   }
 });
 
-this.app.delete('/removeAccount', async (req, res) => {
+app.delete('/removeAccount', async (req, res) => {
   try {
     const { userName } = req.query;
-    const entry = await self.db.removeAccount(userName);
+    const entry = await removeAccount(userName);
     res.send(entry);
   } catch (err) {
     console.log(err);
@@ -108,30 +108,30 @@ this.app.delete('/removeAccount', async (req, res) => {
   }
 });
 
-this.app.post('/updateAccount', async (req, res) => {
+app.post('/updateAccount', async (req, res) => {
   try {
     const { userName, followers, following } = req.query;
-    const entry = await self.db.updateAccount(userName, followers, following);
+    const entry = await updateAccount(userName, followers, following);
     res.send(entry);
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
-this.app.post('/postProduct', async (req, res) => {
+app.post('/postProduct', async (req, res) => {
   try {
     const { ownerUserName, ownerImage, shoeName, shoeDesc, datePosted } = req.query;
-    const entry = await self.db.postProduct(ownerUserName, ownerImage, shoeName, shoeDesc, datePosted);
+    const entry = await postProduct(ownerUserName, ownerImage, shoeName, shoeDesc, datePosted);
     res.send(entry);
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
-this.app.get('/getProduct', async (req, res) => {
+app.get('/getProduct', async (req, res) => {
   try {
     const { ownerUserName, shoeName, datePosted } = req.query;
-    const entry = await self.db.getProduct(ownerUserName, shoeName, datePosted);//
+    const entry = await getProduct(ownerUserName, shoeName, datePosted);
     res.send(entry);
   } catch (err) {
     console.log(err);
@@ -139,6 +139,6 @@ this.app.get('/getProduct', async (req, res) => {
   }
 });
 
-app.listen(PORT || 5000, function(){//listen at process' port
+app.listen(PORT || 5000, function() {//listen at process' port
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });
