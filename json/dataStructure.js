@@ -7,8 +7,8 @@ let loginAuth = {
     pairs: Number,
     followers: Number,
     following: Number,
+    owned: Object
 }
-, rent, income, postProduct, saving
 
 let shoeObject = {
     ownerUserName: String,  
@@ -17,3 +17,15 @@ let shoeObject = {
     shoeDesc: String,
     datePosted: Date
 }
+
+//sample json object 
+let owned = [
+    {
+        id: 1,
+        apiLink: 'xyz'
+    },
+    {
+        id: 2,
+        apiLink: 'abc'
+    }
+]
