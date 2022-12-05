@@ -1,6 +1,5 @@
 import express from 'express';
 import SneaksAPI from 'sneaks-api';
-import {createAccount, removeAccount, readAccount, updateAccount, postProduct, getProduct} from './client/crud.js'
 const app = express();
 const router = express.Router();
 const sneaks = new SneaksAPI();
@@ -8,8 +7,8 @@ const PORT = process.env.PORT || 8080
 app.use('/', express.static('./html'));
 
 //database===========================================================================
-import {processGET} from "./database.js";
-import {processPOST} from "./database.js";
+import {AccountDatabase} from './database.js'
+import { processGET, processPOST } from './database.js';
 import pkg from "pg";
 import { config } from 'dotenv';
 const { Pool } = pkg;
@@ -78,8 +77,8 @@ app.post('/postTable', async (req, res) => {//database post request
 
 app.post('/createAccount', async (req, res) => {
   try {
-    const { userName, userPass, userImg, userLocation, about, pairs, followers, following } = req.query;
-    const entry = await createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following);
+    const { userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want } = req.query;
+    const entry = await AccountDatabase.createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want);
     res.send(entry);
   } catch (err) {
     res.status(500).send(err);
@@ -89,7 +88,7 @@ app.post('/createAccount', async (req, res) => {
 app.get('/readAccount', async (req, res) => {
   try {
     const { userName} = req.query;
-    const entry = await readAccount(userName);
+    const entry = await AccountDatabase.readAccount(userName);
     res.send(entry);
   } catch (err) {
     console.log(err);
@@ -100,7 +99,7 @@ app.get('/readAccount', async (req, res) => {
 app.delete('/removeAccount', async (req, res) => {
   try {
     const { userName } = req.query;
-    const entry = await removeAccount(userName);
+    const entry = await AccountDatabase.removeAccount(userName);
     res.send(entry);
   } catch (err) {
     console.log(err);
@@ -111,7 +110,7 @@ app.delete('/removeAccount', async (req, res) => {
 app.post('/updateAccount', async (req, res) => {
   try {
     const { userName, followers, following } = req.query;
-    const entry = await updateAccount(userName, followers, following);
+    const entry = await AccountDatabase.updateAccount(userName, followers, following);
     res.send(entry);
   } catch (err) {
     res.status(500).send(err);
@@ -121,7 +120,7 @@ app.post('/updateAccount', async (req, res) => {
 app.post('/postProduct', async (req, res) => {
   try {
     const { ownerUserName, ownerImage, shoeName, shoeDesc, datePosted } = req.query;
-    const entry = await postProduct(ownerUserName, ownerImage, shoeName, shoeDesc, datePosted);
+    const entry = await AccountDatabase.postProduct(ownerUserName, ownerImage, shoeName, shoeDesc, datePosted);
     res.send(entry);
   } catch (err) {
     res.status(500).send(err);
@@ -131,7 +130,7 @@ app.post('/postProduct', async (req, res) => {
 app.get('/getProduct', async (req, res) => {
   try {
     const { ownerUserName, shoeName, datePosted } = req.query;
-    const entry = await getProduct(ownerUserName, shoeName, datePosted);
+    const entry = await AccountDatabase.getProduct(ownerUserName, shoeName, datePosted);
     res.send(entry);
   } catch (err) {
     console.log(err);

@@ -4,60 +4,25 @@ export function processGET(id){
 }
 
 //simple example post query from table id
-//TODO: add object param to post actual data
 export function processPOST(id){
-    return (`CREATE TABLE ${id} (user_id VARCHAR ( 25 ) UNIQUE NOT NULL, user_pass VARCHAR ( 16 ) NOT NULL);`);
+    return (`CREATE TABLE ${id} (
+    userName VARCHAR ( 25 ) UNIQUE NOT NULL, 
+    userPass VARCHAR ( 16 ) NOT NULL,
+    userImg  VARCHAR ( 100 ),
+    userLocation VARCHAR ( 50 ),
+    about VARCHAR ( 256 ),
+    pairs INTEGER,
+    followers INTEGER,
+    following INTEGER,
+    favorites INTEGER[],
+    owned INTEGER[],
+    want INTEGER[]
+    );`);
 }
-import 'dotenv/config';
-import pg from 'pg';
 
-const { Pool } = pg;
 
-export class AccountDatabase {
-  constructor(dburl) {
-    this.dburl = dburl;
-  }
+ export class AccountDatabase {
 
-  async connect() {
-    this.pool = new Pool({
-      connectionString: this.dburl,
-      ssl: { rejectUnauthorized: false }, 
-    });
-
-    this.client = await this.pool.connect();
-
-    await this.init();
-  }
-
-  async init() {
-    const queryText = `
-      create table if not exists shoeObject(
-          ownerUserName varchar(30),
-          ownerImage VARBINARY(MAX),
-          shoeName varchar(50),
-          shoeDesc varchar(30),
-          datePosted varchar(30),
-      );
-
-      create table if not exists userObject(
-        userName varchar(30),
-        userPass varchar(50),
-        userImg VARBINARY(MAX),
-        userLocation varchar(30),
-        about varchar(30),
-        pairs varchar(30),
-        followers varchar(30),
-        following varchar(30),
-    );
-    `;
-    const res = await this.client.query(queryText);//
-  }
-
-  async close() {
-    this.client.release();
-    await this.pool.end();
-  }
-  
   async createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following) {
     const queryText =
       'INSERT INTO userObject (userName, userPass, userImg, userLocation, about, pairs, followers, following) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *';

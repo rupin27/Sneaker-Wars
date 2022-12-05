@@ -1,19 +1,17 @@
 let loginAuth = {
     userName: String,
     userPass: String,
-    userImg: Image,
+    userImg: String,
     userLocation: String,
     about: String,
     pairs: Number,
     followers: Number,
     following: Number,
+    favorites: Object,
+    owned: Object,
+    want: Object
 }
-, rent, income, postProduct, saving
 
-let shoeObject = {
-    ownerUserName: String,  
-    ownerImage: Image,
-    shoeName: String,
-    shoeDesc: String,
-    datePosted: Date
-}
+//example of above object containing sneaker IDs for us to use with the sneaks API
+let owned = [ "123", "456"]
+
