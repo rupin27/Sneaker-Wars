@@ -15,7 +15,6 @@ import { config } from 'dotenv';
 const { Pool } = pkg;
 const { Client } = pkg;
 
-
 config();
 const port = parseInt(process.env.PGPORT, 10) || 8080;
 const name = process.env.PGUSER || "team-beta";
