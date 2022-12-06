@@ -112,8 +112,10 @@ const strategy = new LocalStrategy(
 //database==========================================================================
 
 app.get('/', (req, res) => {  //send index.html at root
-  res.sendFile("index");
-  });
+	checkLoggedIn,
+	(req, res) => {
+    res.sendFile("index");
+	}});
 
 app.get('/search', (req, res) => { 
     //getProducts(keyword, limit, callback) takes in a keyword and limit and returns a product array 
