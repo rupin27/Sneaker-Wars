@@ -117,6 +117,41 @@ app.get('/', (req, res) => {  //send index.html at root
     res.sendFile("index");
 	}});
 
+// Handle post data from the login.html form.
+app.post('/login',
+	 passport.authenticate('local' , {     // use username/password authentication
+	     'successRedirect' : '/index',   // when we login, go to /private 
+	     'failureRedirect' : '/login'      // otherwise, back to login
+	 }));
+
+// Handle the URL /login (just output the index.html file).
+app.get('/login',
+	(req, res) => res.sendFile('html/index.html',
+				   { 'root' : __dirname }));
+
+// Handle logging out (takes us back to the login page).
+app.get('/logout', (req, res) => {
+    req.logout(); // Logs us out!
+    res.redirect('/index'); // back to login
+});
+
+// Like login, but add a new user and password IFF one doesn't exist already.
+app.post('/register',
+	 (req, res) => {
+	     const username = req.body['username'];
+	     const password = req.body['password'];
+	     if (addUser(username, password)) {
+		 res.redirect('/index'); //send them to now login and check if the account was created properly 
+	     } else {
+		 res.redirect('/register');  //register again 
+	     }
+	 });
+
+// Register URL
+app.get('/register',
+	(req, res) => res.sendFile('html/register.html',
+				   { 'root' : __dirname }));
+
 app.get('/search', (req, res) => { 
     //getProducts(keyword, limit, callback) takes in a keyword and limit and returns a product array 
     sneaks.getProducts(req.query.shoeName, 1, function(err, products){
