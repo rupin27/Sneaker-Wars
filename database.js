@@ -1,11 +1,11 @@
-//simple example get query from table id
-export function processGET(id){
-    return (`SELECT * FROM ${id}`);
+//simple get query from userObject table
+export function processGET(){
+    return (`SELECT * FROM userTable`);
 }
 
-//simple example post query from table id
-export function processPOST(id){
-    return (`CREATE TABLE ${id} (
+//create userObject table for our database to use for storinng all user information (only call this once and use the table for all DB functions)
+export function processPOST(){
+    return (`CREATE TABLE userTable (
     userName VARCHAR ( 25 ) UNIQUE NOT NULL, 
     userPass VARCHAR ( 16 ) NOT NULL,
     userImg  VARCHAR ( 100 ),
@@ -14,19 +14,19 @@ export function processPOST(id){
     pairs INTEGER,
     followers INTEGER,
     following INTEGER,
-    favorites INTEGER[],
-    owned INTEGER[],
-    want INTEGER[]
+    favorites VARCHAR[],
+    owned VARCHAR[],
+    want VARCHAR[]
     );`);
 }
 
 
  export class AccountDatabase {
 
-  async createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following) {
+  async createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want) {
     const queryText =
-      'INSERT INTO userObject (userName, userPass, userImg, userLocation, about, pairs, followers, following) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *';
-    const res = await this.client.query(queryText, [userName, userPass, userImg, userLocation, about, pairs, followers, following]);
+      'INSERT INTO userTable (userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *';
+    const res = await this.client.query(queryText, [userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want]);
     return res.rows;
   }
 

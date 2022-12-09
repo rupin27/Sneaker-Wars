@@ -36,6 +36,7 @@ app.get('/', (req, res) => {  //send index.html at root
 app.get('/search', (req, res) => { 
     //getProducts(keyword, limit, callback) takes in a keyword and limit and returns a product array 
     sneaks.getProducts(req.query.shoeName, 1, function(err, products){
+    console.log(products[0].styleID)
     res.send(products[0]);
   });
     
@@ -47,7 +48,7 @@ app.get('/search', (req, res) => {
 app.get('/getTable', async (req, res) => {//database get request
   try {
     const client = await pool.connect();
-    const result = await client.query(processGET(req.query.table));
+    const result = await client.query(processGET());
     console.log("RESULTS: ", result);
     res.send(result);
     client.release();
@@ -58,10 +59,10 @@ app.get('/getTable', async (req, res) => {//database get request
 });
 
 
-app.post('/postTable', async (req, res) => {//database post request
+app.post('/postTable', async (req, res) => {//database post request to call one time to create our userObject table
   try {
     const client = await pool.connect();
-    const result = await client.query(processPOST(req.query.table));
+    const result = await client.query(processPOST());
     console.log("RESULTS: ", result);
     res.send(result);
     client.release();

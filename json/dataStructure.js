@@ -7,9 +7,10 @@ let loginAuth = {
     pairs: Number,
     followers: Number,
     following: Number,
-    favorites: Object,
-    owned: Object,
-    want: Object
+    //the last 3 will be arrays that we make strings throught json.stringify
+    favorites: String,
+    owned: String,
+    want: String
 }
 
 //example of above object containing sneaker IDs for us to use with the sneaks API
