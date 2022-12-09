@@ -1,11 +1,11 @@
 //simple example get query from table id
-export function processGET(id){
-    return (`SELECT * FROM ${id}`);
+export function processGET(){
+    return (`SELECT * FROM userObject`);
 }
 
 //simple example post query from table id
 export function processPOST(id){
-    return (`CREATE TABLE ${id} (
+    return (`CREATE TABLE userObject (
     userName VARCHAR ( 25 ) UNIQUE NOT NULL, 
     userPass VARCHAR ( 16 ) NOT NULL,
     userImg  VARCHAR ( 100 ),
