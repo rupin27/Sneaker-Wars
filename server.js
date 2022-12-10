@@ -205,15 +205,10 @@ app.post('/postTable', async (req, res) => {//database post request to call one 
 //insert row in the user table for a new user account containing the given parameters
 app.post('/createAccount', async (req, res) => {
   try {
-    console.log("connecting to pool");
     const client = await pool.connect();
-    console.log("connected");
     const { userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want } = req.query;
-    console.log("query time");
     const entry = createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want);
-    console.log("ENTRY: ", entry);
     const result = await client.query(entry);
-    console.log("RESULTS: ", result);
     res.send(result);
     client.release();
   } catch (err) {
@@ -221,27 +216,18 @@ app.post('/createAccount', async (req, res) => {
   }
 });
 
+//updates specified fields in account provided in user param
+//params:
+//user: specifies the userName of the row to update
+//userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want:
+//may provide up to 11 paramaters in this order to update their fields in the specified row
 app.post('/updateAccount', async (req, res) => {
-  // try {
-  //   const { userName, followers, following } = req.query;
-  //   const entry = await AccountDatabase.updateAccount(userName, followers, following);
-  //   res.send(entry);
-  // } catch (err) {
-  //   res.status(500).send(err);
-  // }
-
-
   try {
-    console.log("connecting to pool");
     const client = await pool.connect();
-    console.log("connected");
     const queryArray = req.query;
     const user = req.query.user;//specify which row by the userName (user is a separate param from userName so we are able to update that column if the user wants to change userName)
-    console.log("updating " + queryArray['user']);
     const entry = updateAccount(user, queryArray);
-    console.log("ENTRY: ", entry);
     const result = await client.query(entry);
-    console.log("RESULTS: ", result);
     res.send(result);
     client.release();
   } catch (err) {
