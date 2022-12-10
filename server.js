@@ -15,8 +15,7 @@ const PORT = process.env.PORT || 8080
 app.use('/', express.static('./html'));
 
 //database===========================================================================
-import {AccountDatabase} from './database.js'
-import { processGET, processPOST, createEntry, createAccount, updateAccount, removeAccount, readAccount } from './database.js';
+import { processGET, processPOST, createAccount, updateAccount, removeAccount, readAccount } from './database.js';
 import pkg from "pg";
 import { config } from 'dotenv';
 const { Pool } = pkg;
@@ -265,46 +264,7 @@ app.get('/readAccount', async (req, res) => {
   }
 });
 
-//for testing purposes, delete or comment out after done using
-// app.post('/createEntry', async (req, res) => {
-//   try {
-//     console.log("connecting to pool");
-//     const client = await pool.connect();
-//     console.log("connected");
-//     const input = req.query.input;
-//     console.log("query time");
-//     const entry = createEntry(input);
-//     console.log("ENTRY: ", entry);
-//     const result = await client.query(entry);
-//     console.log("RESULTS: ", result);
-//     res.send(result);
-//     client.release();
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// });
 
-
-app.post('/postProduct', async (req, res) => {
-  try {
-    const { ownerUserName, ownerImage, shoeName, shoeDesc, datePosted } = req.query;
-    const entry = await AccountDatabase.postProduct(ownerUserName, ownerImage, shoeName, shoeDesc, datePosted);
-    res.send(entry);
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
-app.get('/getProduct', async (req, res) => {
-  try {
-    const { ownerUserName, shoeName, datePosted } = req.query;
-    const entry = await AccountDatabase.getProduct(ownerUserName, shoeName, datePosted);
-    res.send(entry);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send(err);
-  }
-});
 
 app.listen(PORT || 8080, function() {//listen at process' port
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);

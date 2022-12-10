@@ -1,5 +1,3 @@
-import { query } from "express";
-
 //constant to use for creating new tables
 const TABLE_NAME = 'userTable';
 
@@ -25,14 +23,6 @@ export function processPOST(){
     );`);
 }
 
-//test function to create a row in table for one input
-export function createEntry(input) {
-  const queryText =
-    `INSERT INTO ${TABLE_NAME} (userName) VALUES ('${input}') RETURNING *;`;
-  console.log(queryText);
-  return queryText;
-}
-
 
 
 //construct a string representing a sql query for server.js to use in its createAccount function
@@ -43,6 +33,8 @@ export function createAccount(userName, userPass, userImg, userLocation, about, 
   return queryText;
 }
 
+
+//create update query to use in server.js updateAccount function
 export function updateAccount(user, paramArray) {
   let queryText = 'UPDATE ' + TABLE_NAME + ' SET ';
   let comma = '';
@@ -104,7 +96,7 @@ export function removeAccount(userName) {
   return queryText;
 }
 
-
+//create string representation of read query to use in server.js readAccount function
 export function readAccount(userName) {
   console.log('un: ' + userName);
   const queryText =
@@ -112,22 +104,3 @@ export function readAccount(userName) {
   return queryText;
 }
 
- export class AccountDatabase {
-
-
-
-  async postProduct(ownerUserName, ownerImage, shoeName, shoeDesc, datePosted){
-    let date = new Date();
-    const queryText = 
-      'INSERT INTO shoeObject (ownerUserName, ownerImage, shoeName, shoeDesc, datePosted) VALUES ($1, $2, $3, $4) RETURNING *';
-    const res = await this.client.query(queryText, [ownerUserName, ownerImage, shoeName, shoeDesc, datePosted]);
-    return res.rows;
-  }
-
-  async getProduct(ownerUserName, shoeName, datePosted){//
-    const queryText = 
-      'SELECT * FROM shoeObject WHERE ownerUserName = $1, shoeName = $2, datePosted = $3 ';
-    const res = await this.client.query(queryText, [ownerUserName, shoeName, datePosted]);
-    return res.rows;
-  }
-}
