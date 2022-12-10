@@ -155,7 +155,7 @@ app.get('/register',
 				   { 'root' : __dirname }));
 
 
-//search for a sneaker by shoe name
+//search for a sneaker by shoe name with the sneaks API and send a sneaker object
 app.get('/search', (req, res) => { 
     //getProducts(keyword, limit, callback) takes in a keyword and limit and returns a product array 
     sneaks.getProducts(req.query.shoeName, 1, function(err, products){
@@ -169,7 +169,7 @@ app.get('/search', (req, res) => {
 //TODO: add searchN to show search results for more than 1 sneaker
 
 
-//get the user table
+//get the user table containing all user data for every account
 app.get('/getTable', async (req, res) => {//database get request
   try {
     const client = await pool.connect();
@@ -185,6 +185,7 @@ app.get('/getTable', async (req, res) => {//database get request
 
 
 //create the user table
+//note: this should only have to be called once since we use the same table for all the users
 app.post('/postTable', async (req, res) => {//database post request to call one time to create our userObject table
   try {
     const client = await pool.connect();
@@ -201,7 +202,19 @@ app.post('/postTable', async (req, res) => {//database post request to call one 
 
 //crud functionality ==========================================================================
 
-//insert row in the user table for a new user account containing the given parameters
+
+// insert row in the user table for a new user account containing the given parameters
+// userName:     string unique display name for user (max 25 chars)
+// userPass:     string password to log in with (max 16 chars)
+// userImg:      string link to an image for a user profile picture (max 100 chars)
+// userLocation: string user's location (max 50 chars)
+// about:        string representing information the user wishes to share about themself (max 256 chars)
+// pairs:        int representing number of pairs of sneakers user owns
+// followers:    int representing number of users following the user
+// following:    int representing number of other users the user is following
+// favorites:    string which is a stringified JSON of a list containing sneaker IDs of the user's favorite sneakers
+// owned:        string which is a stringified JSON of a list containing sneaker IDS of the user's sneaker collection
+// want:         string which is a stringified JSON of a list containing sneaker IDS of sneakers the user wants
 app.post('/createAccount', async (req, res) => {
   try {
     const client = await pool.connect();
@@ -265,7 +278,7 @@ app.get('/readAccount', async (req, res) => {
 });
 
 
-
-app.listen(PORT || 8080, function() {//listen at process' port
+//server listens at process' port or default
+app.listen(PORT || 8080, function() {
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });

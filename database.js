@@ -1,12 +1,12 @@
 //constant to use for creating new tables
 const TABLE_NAME = 'userTable';
 
-//simple get query from userObject table
+//simple get query from every row in the user table
 export function processGET(){
     return (`SELECT * FROM ${TABLE_NAME}`);
 }
 
-//create userObject table for our database to use for storinng all user information (only call this once and use the table for all DB functions)
+//create user table for our database to use for storinng all user information (only call this once and use the table for all DB functions)
 export function processPOST(){
     return (`CREATE TABLE ${TABLE_NAME} (
     userName VARCHAR ( 25 ) UNIQUE NOT NULL, 
@@ -24,8 +24,7 @@ export function processPOST(){
 }
 
 
-
-//construct a string representing a sql query for server.js to use in its createAccount function
+//create a string representing an insert query for server.js to use in its createAccount function
 export function createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want) {
   const queryText =
     `INSERT INTO ${TABLE_NAME} (userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want) 
@@ -34,7 +33,7 @@ export function createAccount(userName, userPass, userImg, userLocation, about, 
 }
 
 
-//create update query to use in server.js updateAccount function
+//create a string representation of update query to use in server.js updateAccount function
 export function updateAccount(user, paramArray) {
   let queryText = 'UPDATE ' + TABLE_NAME + ' SET ';
   let comma = '';
