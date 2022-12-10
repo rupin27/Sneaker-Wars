@@ -1,11 +1,14 @@
+//constant to use for creating new tables
+const TABLE_NAME = 'userTable';
+
 //simple get query from userObject table
 export function processGET(){
-    return (`SELECT * FROM userTable`);
+    return (`SELECT * FROM ${TABLE_NAME}`);
 }
 
 //create userObject table for our database to use for storinng all user information (only call this once and use the table for all DB functions)
 export function processPOST(){
-    return (`CREATE TABLE userTable (
+    return (`CREATE TABLE ${TABLE_NAME} (
     userName VARCHAR ( 25 ) UNIQUE NOT NULL, 
     userPass VARCHAR ( 16 ) NOT NULL,
     userImg  VARCHAR ( 100 ),
@@ -14,21 +17,38 @@ export function processPOST(){
     pairs INTEGER,
     followers INTEGER,
     following INTEGER,
-    favorites VARCHAR[],
-    owned VARCHAR[],
-    want VARCHAR[]
+    favorites VARCHAR,
+    owned VARCHAR,
+    want VARCHAR
     );`);
 }
+
+//test function to create a row in table for one input
+export function createEntry(input) {
+  const queryText =
+    `INSERT INTO ${TABLE_NAME} (userName) VALUES ('${input}') RETURNING *;`;
+  console.log(queryText);
+  return queryText;
+}
+
+
+
+//construct a string representing a sql query for server.js to use in its createAccount function
+export function createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want) {
+  const queryText =
+    `INSERT INTO ${TABLE_NAME} (userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want) 
+    VALUES ('${userName}', '${userPass}', '${userImg}', '${userLocation}', '${about}', ${pairs}, ${followers}, ${following}, '${favorites}', '${owned}', '${want}') RETURNING *;`;
+  return queryText;
+}
+
+
 
 
  export class AccountDatabase {
 
-  async createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want) {
-    const queryText =
-      'INSERT INTO userTable (userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *';
-    const res = await this.client.query(queryText, [userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want]);
-    return res.rows;
-  }
+
+
+
 
   async removeAccount(userName) {
       const queryText = 'DELETE FROM userObject WHERE userName = $1 RETURNING *';
