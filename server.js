@@ -16,7 +16,7 @@ app.use('/', express.static('./html'));
 
 //database===========================================================================
 import {AccountDatabase} from './database.js'
-import { processGET, processPOST } from './database.js';
+import { processGET, processPOST, createEntry, createAccount } from './database.js';
 import pkg from "pg";
 import { config } from 'dotenv';
 const { Pool } = pkg;
@@ -34,6 +34,8 @@ const pool = new Pool({
       rejectUnauthorized: false
     }
   });
+
+//database==========================================================================
 
 // Passport configuration
 
@@ -109,7 +111,8 @@ const strategy = new LocalStrategy(
   }
 
 
-//database==========================================================================
+//routing================================================================================================
+
 
 app.get('/', (req, res) => {  //send index.html at root
 	checkLoggedIn,
@@ -152,6 +155,8 @@ app.get('/register',
 	(req, res) => res.sendFile('html/register.html',
 				   { 'root' : __dirname }));
 
+
+//search for a sneaker by shoe name
 app.get('/search', (req, res) => { 
     //getProducts(keyword, limit, callback) takes in a keyword and limit and returns a product array 
     sneaks.getProducts(req.query.shoeName, 1, function(err, products){
@@ -161,8 +166,11 @@ app.get('/search', (req, res) => {
     
 });
 
-//add searchN to search more than 1
 
+//TODO: add searchN to show search results for more than 1 sneaker
+
+
+//get the user table
 app.get('/getTable', async (req, res) => {//database get request
   try {
     const client = await pool.connect();
@@ -177,6 +185,7 @@ app.get('/getTable', async (req, res) => {//database get request
 });
 
 
+//create the user table
 app.post('/postTable', async (req, res) => {//database post request to call one time to create our userObject table
   try {
     const client = await pool.connect();
@@ -193,15 +202,43 @@ app.post('/postTable', async (req, res) => {//database post request to call one 
 
 //crud functionality ==========================================================================
 
+//insert row in the user table for a new user account containing the given parameters
 app.post('/createAccount', async (req, res) => {
   try {
+    console.log("connecting to pool");
+    const client = await pool.connect();
+    console.log("connected");
     const { userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want } = req.query;
-    const entry = await AccountDatabase.createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want);
-    res.send(entry);
+    console.log("query time");
+    const entry = createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want);
+    console.log("ENTRY: ", entry);
+    const result = await client.query(entry);
+    console.log("RESULTS: ", result);
+    res.send(result);
+    client.release();
   } catch (err) {
     res.status(500).send(err);
   }
 });
+
+//for testing purposes, delete or comment out after done using
+// app.post('/createEntry', async (req, res) => {
+//   try {
+//     console.log("connecting to pool");
+//     const client = await pool.connect();
+//     console.log("connected");
+//     const input = req.query.input;
+//     console.log("query time");
+//     const entry = createEntry(input);
+//     console.log("ENTRY: ", entry);
+//     const result = await client.query(entry);
+//     console.log("RESULTS: ", result);
+//     res.send(result);
+//     client.release();
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
 
 app.get('/readAccount', async (req, res) => {
   try {
