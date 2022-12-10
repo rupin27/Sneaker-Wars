@@ -105,15 +105,15 @@ export function removeAccount(userName) {
 }
 
 
+export function readAccount(userName) {
+  console.log('un: ' + userName);
+  const queryText =
+    'SELECT * FROM ' + TABLE_NAME + ' WHERE userName = \'' + userName + '\'';
+  return queryText;
+}
+
  export class AccountDatabase {
 
-  
-  async readAccount(userName) {
-      const queryText =
-        'SELECT * FROM userObject where userName = $1';
-      const res = await this.client.query(queryText, [userName]);
-      return res.rows;
-  }
 
 
   async postProduct(ownerUserName, ownerImage, shoeName, shoeDesc, datePosted){

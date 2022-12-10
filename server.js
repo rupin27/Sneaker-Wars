@@ -16,7 +16,7 @@ app.use('/', express.static('./html'));
 
 //database===========================================================================
 import {AccountDatabase} from './database.js'
-import { processGET, processPOST, createEntry, createAccount, updateAccount, removeAccount } from './database.js';
+import { processGET, processPOST, createEntry, createAccount, updateAccount, removeAccount, readAccount } from './database.js';
 import pkg from "pg";
 import { config } from 'dotenv';
 const { Pool } = pkg;
@@ -250,6 +250,21 @@ app.delete('/removeAccount', async (req, res) => {
   }
 });
 
+
+//read row specified containing specified userName
+app.get('/readAccount', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query(readAccount(req.query.userName));
+    console.log("RESULTS: ", result.rows[0]);
+    res.send(result.rows[0]);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
 //for testing purposes, delete or comment out after done using
 // app.post('/createEntry', async (req, res) => {
 //   try {
@@ -268,18 +283,6 @@ app.delete('/removeAccount', async (req, res) => {
 //     res.status(500).send(err);
 //   }
 // });
-
-app.get('/readAccount', async (req, res) => {
-  try {
-    const { userName} = req.query;
-    const entry = await AccountDatabase.readAccount(userName);
-    res.send(entry);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send(err);
-  }
-});
-
 
 
 app.post('/postProduct', async (req, res) => {
