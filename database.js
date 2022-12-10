@@ -1,3 +1,5 @@
+import { query } from "express";
+
 //constant to use for creating new tables
 const TABLE_NAME = 'userTable';
 
@@ -41,6 +43,59 @@ export function createAccount(userName, userPass, userImg, userLocation, about, 
   return queryText;
 }
 
+export function updateAccount(user, paramArray) {
+  let queryText = 'UPDATE ' + TABLE_NAME + ' SET ';
+  let comma = '';
+  console.log(queryText);
+  if('userName' in paramArray){
+    queryText = queryText + comma + 'userName = \'' + paramArray.userName + '\'';
+    comma = ', ';
+  }
+  if('userPass' in paramArray){
+    queryText = queryText + comma + 'userPass = \'' + paramArray.userPass + '\'';
+    comma = ', ';
+  }
+  if('userImg' in paramArray){
+    queryText = queryText + comma + 'userImg = \'' + paramArray.userImg + '\'';
+    comma = ', ';
+  }
+  if('userLocation' in paramArray){
+    queryText = queryText + comma + 'userLocation = \'' + paramArray.userLocation + '\'';
+    comma = ', ';
+  }
+  if('about' in paramArray){
+    queryText = queryText + comma + 'about = \'' + paramArray.about + '\'';
+    comma = ', ';
+  }
+  if('pairs' in paramArray){
+    queryText = queryText + comma + 'pairs = ' + paramArray.pairs;
+    comma = ', ';
+  }
+  if('followers' in paramArray){
+    queryText = queryText + comma + 'followers = ' + paramArray.followers;
+    comma = ', ';
+  }
+  if('following' in paramArray){
+    queryText = queryText + comma + 'following = ' + paramArray.following;
+    comma = ', ';
+  }
+  if('favorites' in paramArray){
+    queryText = queryText + comma + 'favorites = \'' + paramArray.favorites + '\'';
+    comma = ', ';
+  }
+  if('owned' in paramArray){
+    queryText = queryText + comma + 'owned = \'' + paramArray.owned + '\'';
+    comma = ', ';
+  }
+  if('want' in paramArray){
+    queryText = queryText + comma + 'want = \'' + paramArray.want + '\'';
+    comma = ', ';
+  }
+  console.log(queryText);
+
+  queryText = queryText + ' WHERE userName = \'' + user + '\' RETURNING *;';
+  return queryText;
+}
 
 
 
@@ -63,12 +118,6 @@ export function createAccount(userName, userPass, userImg, userLocation, about, 
       return res.rows;
   }
 
-  async updateAccount(userName, followers, following) {
-    const queryText =
-      'UPDATE userObject SET followers = $2, following = $3 WHERE userName = $1 RETURNING *';
-    const res = await this.client.query(queryText, [userName, followers, following]);
-    return res.rows;
-  }
 
   async postProduct(ownerUserName, ownerImage, shoeName, shoeDesc, datePosted){
     let date = new Date();

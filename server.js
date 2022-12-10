@@ -16,7 +16,7 @@ app.use('/', express.static('./html'));
 
 //database===========================================================================
 import {AccountDatabase} from './database.js'
-import { processGET, processPOST, createEntry, createAccount } from './database.js';
+import { processGET, processPOST, createEntry, createAccount, updateAccount } from './database.js';
 import pkg from "pg";
 import { config } from 'dotenv';
 const { Pool } = pkg;
@@ -221,6 +221,34 @@ app.post('/createAccount', async (req, res) => {
   }
 });
 
+app.post('/updateAccount', async (req, res) => {
+  // try {
+  //   const { userName, followers, following } = req.query;
+  //   const entry = await AccountDatabase.updateAccount(userName, followers, following);
+  //   res.send(entry);
+  // } catch (err) {
+  //   res.status(500).send(err);
+  // }
+
+
+  try {
+    console.log("connecting to pool");
+    const client = await pool.connect();
+    console.log("connected");
+    const queryArray = req.query;
+    const user = req.query.user;//specify which row by the userName (user is a separate param from userName so we are able to update that column if the user wants to change userName)
+    console.log("updating " + queryArray['user']);
+    const entry = updateAccount(user, queryArray);
+    console.log("ENTRY: ", entry);
+    const result = await client.query(entry);
+    console.log("RESULTS: ", result);
+    res.send(result);
+    client.release();
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 //for testing purposes, delete or comment out after done using
 // app.post('/createEntry', async (req, res) => {
 //   try {
@@ -262,15 +290,6 @@ app.delete('/removeAccount', async (req, res) => {
   }
 });
 
-app.post('/updateAccount', async (req, res) => {
-  try {
-    const { userName, followers, following } = req.query;
-    const entry = await AccountDatabase.updateAccount(userName, followers, following);
-    res.send(entry);
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
 
 app.post('/postProduct', async (req, res) => {
   try {
