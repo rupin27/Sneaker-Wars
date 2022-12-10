@@ -97,19 +97,16 @@ export function updateAccount(user, paramArray) {
   return queryText;
 }
 
+//create string representation of remove query to use in server.js removeAccount function
+export function removeAccount(userName) {
+  const queryText = 
+  'DELETE FROM ' + TABLE_NAME + ' WHERE userName = \'' + userName + '\' RETURNING *;';
+  return queryText;
+}
 
 
  export class AccountDatabase {
 
-
-
-
-
-  async removeAccount(userName) {
-      const queryText = 'DELETE FROM userObject WHERE userName = $1 RETURNING *';
-      const res = await this.client.query(queryText, [userName]);
-      return res.rows;
-  }
   
   async readAccount(userName) {
       const queryText =

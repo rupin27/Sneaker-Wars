@@ -16,7 +16,7 @@ app.use('/', express.static('./html'));
 
 //database===========================================================================
 import {AccountDatabase} from './database.js'
-import { processGET, processPOST, createEntry, createAccount, updateAccount } from './database.js';
+import { processGET, processPOST, createEntry, createAccount, updateAccount, removeAccount } from './database.js';
 import pkg from "pg";
 import { config } from 'dotenv';
 const { Pool } = pkg;
@@ -235,6 +235,21 @@ app.post('/updateAccount', async (req, res) => {
   }
 });
 
+
+//remove row in user table containing specified userName
+app.delete('/removeAccount', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const user = req.query.userName;
+    const entry = removeAccount(user);
+    const result = await client.query(entry);
+    res.send(result);
+    client.release();
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 //for testing purposes, delete or comment out after done using
 // app.post('/createEntry', async (req, res) => {
 //   try {
@@ -265,16 +280,6 @@ app.get('/readAccount', async (req, res) => {
   }
 });
 
-app.delete('/removeAccount', async (req, res) => {
-  try {
-    const { userName } = req.query;
-    const entry = await AccountDatabase.removeAccount(userName);
-    res.send(entry);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send(err);
-  }
-});
 
 
 app.post('/postProduct', async (req, res) => {
