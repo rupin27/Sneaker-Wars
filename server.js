@@ -250,7 +250,10 @@ app.post('/updateAccount', async (req, res) => {
 });
 
 
-//remove row in user table containing specified userName
+//remove row in user table containing specified userName and userPass
+//params:
+//userName
+//userPass
 app.delete('/removeAccount', async (req, res) => {
   try {
     const client = await pool.connect();
@@ -265,7 +268,10 @@ app.delete('/removeAccount', async (req, res) => {
 });
 
 
-//read row specified containing specified userName and password
+//read row specified containing specified userName and userPass
+//params:
+//userName
+//userPass
 //NOTE: this sends all fields (INCLUDING PASSWORD) and should not be available to any other users
 //TODO: create another endpoint for other users to view information that does not send password
 app.get('/readAccount', async (req, res) => {
