@@ -33,114 +33,97 @@
 
 
     <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-lg-9 col-xl-7">
             <div class="card">
-            <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+              <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                <img src="images/avitar.jpg" id="profilePicture"
+                 <img src="images/avitar.jpg" id="profilePicture"
                     alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                     style="width: 150px; z-index: 1">
-                <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+                  <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
                     style="z-index: 1;" id="editOrFollowButton">Edit profile</button>
                 </div>
                 <div class="ms-3" style="margin-top: 130px;">
-                <h5 id="username">User Name</h5>
-                <p id="location">Location</p>
+                  <h5 id="username">User Name</h5>
+                 <p id="location">Location</p>
                 </div>
-            </div>
-            <div class="p-4 text-black" style="background-color: #f8f9fa;">
+              </div>
+              <div class="p-4 text-black" style="background-color: #f8f9fa;">
                 <div class="d-flex justify-content-end text-center py-1">
-                <!-- <div>
-                    <p class="mb-1 h5">55</p>
-                    <p class="small text-muted mb-0" id="pairs">Pairs</p>
-                </div> -->
-                <div class="px-3">
+                  <div class="px-3">
                     <p class="mb-1 h5" id="followers">0</p>
                     <p class="small text-muted mb-0">Followers</p>
-                </div>
+                  </div>
                 <div>
                     <p class="mb-1 h5" id="following">0</p>
                     <p class="small text-muted mb-0">Following</p>
                 </div>
-                </div>
+              </div>
             </div>
             <div class="card-body p-4 text-black">
-                <div class="mb-5">
+              <div class="mb-5">
                 <p class="lead fw-normal mb-1">About</p>
                 <div class="p-4" style="background-color: #f8f9fa;">
-                    <p class="font-italic mb-1" id="about">User bio goes here :)
-                    </p>
+                  <p class="font-italic mb-1" id="about">User bio goes here :)
+                  </p>
                 </div>
-                </div>
-
-                <!--container for favorites, owned, and want lists-->
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                  <div class="accordion" id="accordionPanelsStayOpenExample">
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                        <button class="accordion-button bg-danger text-white" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                          My Favorite Sneakers &nbsp
-                        </button>
-                      </h2>
-                      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                        <div class="accordion-body" id="favoritesList">
-                          <!--js creates list of favorite sneakers here-->
-                        </div>
-                      </div>
-                    </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                        <button class="accordion-button collapsed bg-danger text-white" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                          Sneakers I Own
-                        </button>
-                      </h2>
-                      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                        <div class="accordion-body" id="ownedList">
-                          <!--js creates list of owned sneakers here-->
-                        </div>
-                      </div>
-                    </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                        <button class="accordion-button collapsed bg-danger text-white" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                          Sneakers I Want
-                        </button>
-                      </h2>
-                      <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                        <div class="accordion-body" id="wantList">
-                          <!--js creates list of wanted sneakers here-->
+              </div>
+              <!--container for favorites, owned, and want lists-->
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                      <button class="accordion-button bg-danger text-white" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        My Favorite Sneakers &nbsp
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                      <div class="accordion-body" id="favoritesList">
+                        <!--js creates list of favorite sneakers here-->
+                        <div class="container text-center">
+                          <div class="row row-cols-auto" id="favoritesGrid">
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                <!-- <p class="lead fw-normal mb-0">Favorite Sneakers:</p> -->
-                <!-- <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p> -->
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                      <button class="accordion-button collapsed bg-danger text-white" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        Sneakers I Own
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                      <div class="accordion-body" id="ownedList">
+                        <!--js creates list of owned sneakers here-->
+                        <div class="container text-center">
+                          <div class="row row-cols-auto" id="ownedGrid">
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                      <button class="accordion-button collapsed bg-danger text-white" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                        Sneakers I Want
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                      <div class="accordion-body" id="wantList">
+                        <!--js creates list of wanted sneakers here-->
+                        <div class="container text-center">
+                          <div class="row row-cols-auto" id="wantGrid">
+                          </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <!-- <div class="row g-2">
-                <div class="col mb-2">
-                    <img src="images/univBlue.jpg"
-                    alt="image 1" class="w-100 rounded-3">
-                </div>
-                <div class="col mb-2">
-                    <img src="images/fireRed.jpg"
-                    alt="image 1" class="w-100 rounded-3">
-                </div>
-                </div>
-                <div class="row g-2">
-                <div class="col">
-                    <img src="images/redOct.jpg"
-                    alt="image 1" class="w-100 rounded-3">
-                </div>
-                <div class="col">
-                    <img src="images/mags.jpg"
-                    alt="image 1" class="w-100 rounded-3">
-                </div>
-                </div> -->
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
   </body>
+  <script src="profile.js"></script>
 </html>
