@@ -231,6 +231,7 @@ app.post('/createAccount', async (req, res) => {
 //updates specified fields in account provided in user param
 //params:
 //user: specifies the userName of the row to update
+//pass: password for user
 //userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want:
 //may provide up to 11 paramaters in this order to update their fields in the specified row
 app.post('/updateAccount', async (req, res) => {
@@ -238,7 +239,8 @@ app.post('/updateAccount', async (req, res) => {
     const client = await pool.connect();
     const queryArray = req.query;
     const user = req.query.user;//specify which row by the userName (user is a separate param from userName so we are able to update that column if the user wants to change userName)
-    const entry = updateAccount(user, queryArray);
+    const pass = req.query.pass;//password to make sure only the user can update their own account
+    const entry = updateAccount(user, pass, queryArray);
     const result = await client.query(entry);
     res.send(result);
     client.release();
@@ -263,11 +265,13 @@ app.delete('/removeAccount', async (req, res) => {
 });
 
 
-//read row specified containing specified userName
+//read row specified containing specified userName and password
+//NOTE: this sends all fields (INCLUDING PASSWORD) and should not be available to any other users
+//TODO: create another endpoint for other users to view information that does not send password
 app.get('/readAccount', async (req, res) => {
   try {
     const client = await pool.connect();
-    const result = await client.query(readAccount(req.query.userName));
+    const result = await client.query(readAccount(req.query.userName, req.query.userPass));
     console.log("RESULTS: ", result.rows[0]);
     res.send(result.rows[0]);
     client.release();

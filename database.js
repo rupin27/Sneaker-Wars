@@ -9,9 +9,9 @@ export function processGET(){
 //create user table for our database to use for storinng all user information (only call this once and use the table for all DB functions)
 export function processPOST(){
     return (`CREATE TABLE ${TABLE_NAME} (
-    userName VARCHAR ( 25 ) UNIQUE NOT NULL, 
-    userPass VARCHAR ( 16 ) NOT NULL,
-    userImg  VARCHAR ( 100 ),
+    userName VARCHAR UNIQUE NOT NULL, 
+    userPass VARCHAR NOT NULL,
+    userImg  VARCHAR,
     userLocation VARCHAR ( 50 ),
     about VARCHAR ( 256 ),
     pairs INTEGER,
@@ -34,10 +34,9 @@ export function createAccount(userName, userPass, userImg, userLocation, about, 
 
 
 //create a string representation of update query to use in server.js updateAccount function
-export function updateAccount(user, paramArray) {
+export function updateAccount(user, pass, paramArray) {
   let queryText = 'UPDATE ' + TABLE_NAME + ' SET ';
   let comma = '';
-  console.log(queryText);
   if('userName' in paramArray){
     queryText = queryText + comma + 'userName = \'' + paramArray.userName + '\'';
     comma = ', ';
@@ -82,24 +81,22 @@ export function updateAccount(user, paramArray) {
     queryText = queryText + comma + 'want = \'' + paramArray.want + '\'';
     comma = ', ';
   }
-  console.log(queryText);
 
-  queryText = queryText + ' WHERE userName = \'' + user + '\' RETURNING *;';
+  queryText = queryText + ' WHERE userName = \'' + user + '\' AND userPass = \'' + pass + '\' RETURNING *;';
   return queryText;
 }
 
 //create string representation of remove query to use in server.js removeAccount function
-export function removeAccount(userName) {
+export function removeAccount(userName, userPass) {
   const queryText = 
-  'DELETE FROM ' + TABLE_NAME + ' WHERE userName = \'' + userName + '\' RETURNING *;';
+  'DELETE FROM ' + TABLE_NAME + ' WHERE userName = \'' + userName + '\' AND userPass = \'' + userPass + '\' RETURNING *;';
   return queryText;
 }
 
 //create string representation of read query to use in server.js readAccount function
-export function readAccount(userName) {
-  console.log('un: ' + userName);
+export function readAccount(userName, userPass) {
   const queryText =
-    'SELECT * FROM ' + TABLE_NAME + ' WHERE userName = \'' + userName + '\'';
+    'SELECT * FROM ' + TABLE_NAME + ' WHERE userName = \'' + userName + '\' AND userPass = \'' + userPass + '\';';
   return queryText;
 }
 
