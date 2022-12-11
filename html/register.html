@@ -12,7 +12,7 @@
 
     <nav class="navbar sticky-top navbar-expand-lg bg-danger bg-gradient">
       <div class="container-fluid justify-content-between">
-        <a class="navbar-brand text-white" href="index.html"><img src="images/sneakerWarsIcon.png" height="30"/>&nbspSneaker Wars</a>
+        <a class="navbar-brand text-white" href="register.html"><img src="images/sneakerWarsIcon.png" height="30"/>&nbspSneaker Wars</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,20 +35,22 @@
       <form>
         <img src="images/sneakerWars.png" alt ="logo" class = "form-control"><br>
         <div class="form-outline mb-4">
-          <input type="email" id="username_input" class="form-control" placeholder="Username"/>
+          <input type="email" id="username_input_reg" class="form-control" placeholder="Username"/>
         </div>
         <div class="form-outline mb-4">
-          <input type="password" id="password_input" class="form-control" placeholder="Password" />
+          <input type="password" id="password_input_reg" class="form-control" placeholder="Password" />
         </div>
       
       
         <!-- Submit and Register buttons -->
         <div class="text-center">
-          <button type="button" class="btn btn-primary btn-block mb-4" id="sign_in">Sign in</button><br>
-          <p>Not a member? <a href="register.html">Register</a></p>
+          <a href="index.html">
+            <button type="button" class="btn btn-primary btn-block mb-4" id="register">Register</button><br>
+          </a>
         </div>
       </form>
-      <script src="login.js"></script>
+      <script src="register.js"></script>
     </div>
   </body>
 </html>
+
