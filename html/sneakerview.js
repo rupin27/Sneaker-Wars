@@ -13,6 +13,7 @@ window.localStorage.removeItem("search");
         document.getElementById('releaseDate').innerText = sneakerJSON.releaseDate;
         document.getElementById('retail').innerText = '$' + sneakerJSON.retailPrice;
         document.getElementById('description').innerText = sneakerJSON.description;
+        document.getElementById('styleID').innerText = sneakerJSON.styleID;
         document.getElementById('stockx').innerText = sneakerJSON.resellLinks["stockX"];
         document.getElementById('stockx').setAttribute("href",sneakerJSON.resellLinks["stockX"]);
         document.getElementById('goat').innerText = sneakerJSON.resellLinks["goat"];
@@ -26,3 +27,42 @@ window.localStorage.removeItem("search");
     }
 
 })();
+
+document.getElementById("addFav").addEventListener('click', ()=>{
+    (async function postToList(){
+
+
+
+        //get favorites from user account
+        let favList = [];
+        (async function getFavs(){
+            console.log('fetching user from DB');
+            const response = await fetch('/readAccount?userName=' + window.localStorage.getItem('username') + '&userPass=' + window.localStorage.getItem('password'));
+            if(response.ok){
+                let userJSON = await response.json(); 
+        
+                //get old favorites list
+                favList = JSON.parse(userJSON.favorites);
+
+
+                 //push style id to favorites list
+                favList.push(document.getElementById('styleID').innerText);
+
+            }else{
+                alert('error fetching user');
+            }
+
+
+            //update user account with new favorites list
+            const res2 = await fetch('/updateAccount?user=' + window.localStorage.getItem('username') + '&pass=' + window.localStorage.getItem('password') + '&favorites=' + 
+            JSON.stringify(favList), {method: 'POST'});
+            if(res2.ok){
+                console.log("Added " + document.getElementById('styleID').innerText + " to favorites");
+            }else{
+                alert('error adding sneaker');
+            }
+
+
+        })();
+    })();
+});

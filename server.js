@@ -159,7 +159,6 @@ app.get('/register',
 app.get('/search', (req, res) => { 
     //getProducts(keyword, limit, callback) takes in a keyword and limit and returns a product array 
     sneaks.getProducts(req.query.shoeName, 1, function(err, products){
-    console.log(products[0].styleID)
     res.send(products[0]);
   });
     

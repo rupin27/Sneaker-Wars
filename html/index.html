@@ -45,7 +45,39 @@
         <!-- Submit and Register buttons -->
         <div class="text-center">
           <button type="button" class="btn btn-primary btn-block mb-4" id="sign_in">Sign in</button><br>
-          <p>Not a member? <a href="register.html">Register</a></p>
+          <p>Not a member? <a href="#" id="modal-toggler" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Register</a></p>
+
+          <!-- Modal -->
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Register</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                  <!--Register form-->
+                  <form>
+                    <div class="mb-3">
+                      <label for="username-input" class="form-label">Username</label>
+                      <input class="form-control" id="username-input">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword">
+                    </div>
+                  </form>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="register-cancel-button">Cancel</button>
+                  <button type="button" class="btn btn-primary" id="register-button">Register</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </form>
       <script src="login.js"></script>
