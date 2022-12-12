@@ -1,4 +1,4 @@
-import {MiniCrypt} from '../server/miniCrypt.js'
+import MiniCrypt from '../server/miniCrypt.js'
 
 let users = {}
 const mc = new MiniCrypt();

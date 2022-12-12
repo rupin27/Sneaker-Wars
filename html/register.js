@@ -1,4 +1,4 @@
-import {MiniCrypt} from '../server/miniCrypt.js'
+import MiniCrypt from '../server/miniCrypt.js'
 // userName VARCHAR UNIQUE NOT NULL, 
 // userPass VARCHAR NOT NULL,
 // userImg  VARCHAR,
