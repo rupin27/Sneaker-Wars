@@ -66,7 +66,8 @@ let pass = window.localStorage.getItem("password");
 
 
         console.log("viewing " + user + '\'s profile');
-    }else{
+    }
+    else{
         alert('error fetching user');
     }
 
