@@ -74,40 +74,40 @@
 
 //Method 2
 
-const response = await fetch('/createAccount', { 
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json;charset=utf-8' },
-        body: JSON.stringify({ userName: document.getElementById("username_input_reg").value, userPass: document.getElementById("password_input_reg").value, userImg: "none", userLocation: "none", about: "none", pairs: 0, followers: 0, following: 0, favorites: "none", owned: "none", want: "none" })
-})
-if (response.ok) { 
-    console.log("response ok");
-    let userJSON = await response.json();
-} else { // error occurred
-    alert('error fetching user');
-}
+// const response = await fetch('/createAccount', { 
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json;charset=utf-8' },
+//         body: JSON.stringify({ userName: document.getElementById("username_input_reg").value, userPass: document.getElementById("password_input_reg").value, userImg: "none", userLocation: "none", about: "none", pairs: 0, followers: 0, following: 0, favorites: "none", owned: "none", want: "none" })
+// })
+// if (response.ok) { 
+//     console.log("response ok");
+//     let userJSON = await response.json();
+// } else { // error occurred
+//     alert('error fetching user');
+// }
 
 //Method 3
 
-// const response = await fetch('/createAccount', {
-// method: 'POST',
-// headers: {
-//   'Content-Type': 'application/json;charset=utf-8' },
-// },
-// body: `{
-//    userName: document.getElementById("username_input_reg").value, 
-//    userPass: document.getElementById("password_input_reg").value, 
-//    userImg: "none", 
-//    userLocation: "none", 
-//    about: "none",
-//    pairs: 0, 
-//    followers: 0, 
-//    following: 0, 
-//    favorites: "none", 
-//    owned: "none", 
-//    want: "none"
-//   }`,
-// });
-// response.json().then(data => {
-//   console.log(data);
-// });
+const response = await fetch('/createAccount', {
+method: 'POST',
+headers: {
+  'Content-Type': 'application/json;charset=utf-8' },
+},
+body: `{
+   userName: document.getElementById("username_input_reg").value, 
+   userPass: document.getElementById("password_input_reg").value, 
+   userImg: "none", 
+   userLocation: "none", 
+   about: "none",
+   pairs: 0, 
+   followers: 0, 
+   following: 0, 
+   favorites: "none", 
+   owned: "none", 
+   want: "none"
+  }`,
+});
+response.json().then(data => {
+  console.log(data);
+});
