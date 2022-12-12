@@ -45,47 +45,47 @@
 
 // document.getElementById("register").addEventListener('click', postUser);
 
-const registerButton = document.getElementById('register');
-registerButton.addEventListener('click', async  e => {
-    let data = JSON.stringify({
-        "userName": document.getElementById("username_input_reg").value, 
-        "userPass": document.getElementById("password_input_reg").value, 
-        "userImg": "none", 
-        "userLocation": "none", 
-        "about": "none",
-        "pairs": 0, 
-        "followers": 0, 
-        "following": 0, 
-        "favorites": "none", 
-        "owned": "none", 
-        "want": "none"
-    });
-    const response = await fetch('/createAccount', {
-        method: "POST",
-        headers:  {'Content-Type': 'application/json'},
-        body: data,
-    });
-    if (response.ok) {
-        console.log("response ok");
-        let userJSON = await response.json();
-        console.log(userJSON)
-    }
-});
+// const registerButton = document.getElementById('register');
+// registerButton.addEventListener('click', async  e => {
+//     let data = JSON.stringify({
+//         "userName": document.getElementById("username_input_reg").value, 
+//         "userPass": document.getElementById("password_input_reg").value, 
+//         "userImg": "none", 
+//         "userLocation": "none", 
+//         "about": "none",
+//         "pairs": 0, 
+//         "followers": 0, 
+//         "following": 0, 
+//         "favorites": "none", 
+//         "owned": "none", 
+//         "want": "none"
+//     });
+//     const response = await fetch('/createAccount', {
+//         method: "POST",
+//         headers:  {'Content-Type': 'application/json'},
+//         body: data,
+//     });
+//     if (response.ok) {
+//         console.log("response ok");
+//         let userJSON = await response.json();
+//         console.log(userJSON)
+//     }
+// });
 
 //Method 2
 
-// const response = await fetch('/createAccount', { 
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json;charset=utf-8' },
-//         body: JSON.stringify({ userName: document.getElementById("username_input_reg").value, userPass: document.getElementById("password_input_reg").value, userImg: "none", userLocation: "none", about: "none", pairs: 0, followers: 0, following: 0, favorites: "none", owned: "none", want: "none" })
-// })
-// if (response.ok) { 
-//     console.log("response ok");
-//     let userJSON = await response.json();
-// } else { // error occurred
-//     alert('error fetching user');
-// }
+const response = await fetch('/createAccount', { 
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json;charset=utf-8' },
+        body: JSON.stringify({ userName: document.getElementById("username_input_reg").value, userPass: document.getElementById("password_input_reg").value, userImg: "none", userLocation: "none", about: "none", pairs: 0, followers: 0, following: 0, favorites: "none", owned: "none", want: "none" })
+})
+if (response.ok) { 
+    console.log("response ok");
+    let userJSON = await response.json();
+} else { // error occurred
+    alert('error fetching user');
+}
 
 //Method 3
 
