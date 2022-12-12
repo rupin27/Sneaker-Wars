@@ -27,9 +27,44 @@ Displays an image and some useful information about a sneaker after the user eit
 ![login](../docs/images/sneakerviewer.JPG)
 
 
-##API
+## API
 /createAccount  
 creates a new user account with spceified userName and userPass if no other account exists with that userName  
 
 /updateAccount  
-updates specified fields in account. paramaters are user, pass, and 
+updates specified fields in account. paramaters are user, pass, and any fields the user wants to update (see database section for all possible fields)
+
+/removeAccount  
+removes account with specified userName and userPass
+
+/readAccount  
+get the information for account with specified user and pass
+
+## Database
+
+![login](../docs/images/db.JPG)  
+userName: username for account, must be unique
+userPass: password for account
+userImg: profile picture for account
+userLocation: location to display in user profile
+about: description/bio for user profile
+pairs: number of pairs of sneakers the user owns
+followers: number of followers user has
+following: number of other users the user is following
+favorites: list of sneaker IDs for user's favorite sneakers
+owned: list of sneaker IDs for user's collection
+want: list of sneaker IDs for sneakers the user wants  
+
+## URL Routes
+/index.html: serves the main login page  
+
+/sneakerview.html?shoeName=`shoe name here`: serves sneaker viewer for the shoe name specified in the query
+
+## Authentication/Authorization
+
+Users must be logged in with their username and password to add shoes to their profile
+
+## Division of Labor
+
+Sean: Created html and js files for milestone 1, created server, heroku, and database, set up routes and endpoints for server, made all crud operations for database user table, made sneaker viewer page with the sneaks API, made user profile generate from database information, made markdown files, made final video
+
