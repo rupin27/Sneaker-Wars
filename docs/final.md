@@ -28,4 +28,8 @@ Displays an image and some useful information about a sneaker after the user eit
 
 
 ##API
-/createAccount
+/createAccount  
+creates a new user account with spceified userName and userPass if no other account exists with that userName  
+
+/updateAccount  
+updates specified fields in account. paramaters are user, pass, and 
