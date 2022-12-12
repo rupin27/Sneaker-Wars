@@ -28,16 +28,16 @@ Displays an image and some useful information about a sneaker after the user eit
 
 
 ## API
-/createAccount  
+<b>/createAccount</b>  
 creates a new user account with spceified userName and userPass if no other account exists with that userName  
 
-/updateAccount  
+<b>/updateAccount</b>
 updates specified fields in account. paramaters are user, pass, and any fields the user wants to update (see database section for all possible fields)
 
-/removeAccount  
+<b>/removeAccount</b>
 removes account with specified userName and userPass
 
-/readAccount  
+<b>/readAccount</b> 
 get the information for account with specified user and pass
 
 ## Database
