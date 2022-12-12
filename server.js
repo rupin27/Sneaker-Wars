@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 8080
 app.use('/', express.static('./html'));
 
 //database===========================================================================
-import { processGET, processPOST, createAccount, updateAccount, removeAccount, readAccount } from './database.js';
+import { processGET, processPOST, createAccount, updateAccount, removeAccount, readAccount, findAccount } from './database.js';
 import pkg from "pg";
 import { config } from 'dotenv';
 const { Pool } = pkg;
@@ -277,6 +277,20 @@ app.get('/readAccount', async (req, res) => {
   try {
     const client = await pool.connect();
     const result = await client.query(readAccount(req.query.userName, req.query.userPass));
+    console.log("RESULTS: ", result.rows[0]);
+    res.send(result.rows[0]);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+//find a user based on userName from the database
+app.get('/findAccount', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query(findAccount(req.query.userName));
     console.log("RESULTS: ", result.rows[0]);
     res.send(result.rows[0]);
     client.release();
