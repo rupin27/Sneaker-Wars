@@ -66,5 +66,10 @@ Users must be logged in with their username and password to add shoes to their p
 
 ## Division of Labor
 
-Sean: Created html and js files for milestone 1, created server, heroku, and database, set up routes and endpoints for server, made all crud operations for database user table, made sneaker viewer page with the sneaks API, made user profile generate from database information, made markdown files, made final video
+Sean: Created html and js files, created server, heroku, and database, set up routes and endpoints for server, made crud operations for database user table, made sneaker viewer page with the sneaks API, made user profile generate from database information, made markdown files, made final video
 
+Rupin: Created github repository and inital configuration, Created html and js files, created server, firebase (intially but then replace by heroku), and database, set up routes and endpoints for server, made crud operations for database user table, constructed the backend database design, made the the login authentication and register functionality, made markdown files, made final video
+
+### Conclusion:
+
+The experience of building our own website and involving in something practical and industrial really helped in understanding the concepts taught in this class better. Before beginning this project, the backend functionality and login authentication process used for websites was somewhat unfamiliar to our group but to understand and then implement them ourselves through trial and testing was an enriching experience. Even with missing contributions and lack of communication from some of the members in our group, we were able to push through and construct what we planned, which is a real life issue that could spring up and every individual should be ready to cope with. Previously, we have worked with other online databases like Firebase and AWS and this was our first time interacting with heroku which somewhat slowed down our progress considering we had to understand its functionality, however after that it was all about having our concepts clear. Overall, my teammate and I found this project helpful in both educational and practical ways. 
