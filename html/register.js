@@ -16,22 +16,47 @@
 // want VARCHAR
 
 async function postUser() {
-    console.log('fetching user from DB');
-    const response = await fetch('/createAccount?userName=' + document.getElementById("username_input_reg").value + '&userPass=' + document.getElementById("password_input_reg").value + '&userImg=' + "none" + '&userLocation=' + "none" + '&about=' + "none" + '&pairs=' + 0 + '&followers=' + 0 + '&following=' + 0 + '&favorites=' + "none" + '&owned=' + "none" + '&want=' + "none",     {
-        method: 'POST',
-      });
-    if (response.ok) {
-        console.log("response ok");
-        let userJSON = await response.json();
-        console.log(userJSON)
-        alert("You have been registered successfully! Redirecting to the login page");
+  console.log("fetching user from DB");
+  const response = await fetch(
+    "/createAccount?userName=" +
+      document.getElementById("username_input_reg").value +
+      "&userPass=" +
+      document.getElementById("password_input_reg").value +
+      "&userImg=" +
+      "none" +
+      "&userLocation=" +
+      "none" +
+      "&about=" +
+      "none" +
+      "&pairs=" +
+      0 +
+      "&followers=" +
+      0 +
+      "&following=" +
+      0 +
+      "&favorites=" +
+      "none" +
+      "&owned=" +
+      "none" +
+      "&want=" +
+      "none",
+    {
+      method: "POST",
     }
-    else {
-        alert('error fetching user');
-    }
+  );
+  if (response.ok) {
+    console.log("response ok");
+    let userJSON = await response.json();
+    console.log(userJSON);
+    alert(
+      "You have been registered successfully! Redirecting to the login page"
+    );
+  } else {
+    alert("error fetching user");
+  }
 }
 
-document.getElementById("register").addEventListener('click', postUser);
+document.getElementById("register").addEventListener("click", postUser);
 
 // document.getElementById("register").addEventListener('click', () => {
 //     try {
