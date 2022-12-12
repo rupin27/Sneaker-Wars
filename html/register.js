@@ -45,7 +45,7 @@
 
 // document.getElementById("register").addEventListener('click', postUser);
 
-const registerButton = document.getElementById('register');
+const registerButton = document.getElementById("register");
 registerButton.addEventListener('click', async  e => {
     let data = JSON.stringify({
         "userName": document.getElementById("username_input_reg").value, 
