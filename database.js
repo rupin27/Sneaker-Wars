@@ -100,3 +100,9 @@ export function readAccount(userName, userPass) {
   return queryText;
 }
 
+export function findAccount(userName) {
+  const queryText =
+    'SELECT * FROM ' + TABLE_NAME + ' WHERE userName = \'' + userName + '\';';
+  return queryText;
+}
+
