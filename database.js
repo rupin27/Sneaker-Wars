@@ -23,6 +23,7 @@ export function processPOST(){
     );`);
 }
 
+
 //create a string representing an insert query for server.js to use in its createAccount function
 export function createAccount(userName, userPass, userImg, userLocation, about, pairs, followers, following, favorites, owned, want) {
   const queryText =
