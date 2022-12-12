@@ -3,7 +3,19 @@
 //  //                                    userName                                       userPass                                userImg userLocation about pairs followers, following, favorites, owned, want
 //  });
 
-document.getElementById("register").addEventListener('click', async () => {
+// userName VARCHAR UNIQUE NOT NULL, 
+// userPass VARCHAR NOT NULL,
+// userImg  VARCHAR,
+// userLocation VARCHAR ( 50 ),
+// about VARCHAR ( 256 ),
+// pairs INTEGER,
+// followers INTEGER,
+// following INTEGER,
+// favorites VARCHAR,
+// owned VARCHAR,
+// want VARCHAR
+
+async function postUser() {
     console.log('fetching user from DB');
     const response = await fetch('/createAccount?userName=' + document.getElementById("username_input_reg").value + '&userPass=' + document.getElementById("password_input_reg").value + '&userImg=' + "none" + '&userLocation=' + "none" + '&about=' + "none" + '&pairs=' + 0 + '&followers=' + 0 + '&following=' + 0 + '&favorites=' + "none" + '&owned=' + "none" + '&want=' + "none");
     if (response.ok) {
@@ -15,7 +27,8 @@ document.getElementById("register").addEventListener('click', async () => {
     else {
         alert('error fetching user');
     }
-});
+}
+document.getElementById("register").addEventListener('click', postUser);
 
 // document.getElementById("register").addEventListener('click', () => {
 //     try {
