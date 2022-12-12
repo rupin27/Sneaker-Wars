@@ -67,6 +67,8 @@ registerButton.addEventListener('click', async  e => {
     });
     if (response.ok) {
         console.log("response ok");
+        let userJSON = await response.json();
+        console.log(userJSON)
     }
 });
 
